@@ -27,7 +27,7 @@ module.exports = {
       .select('-__v')
       .then(async (user) =>
         !user
-          ? res.status(404).json({ message: 'No user with that ID' })
+          ? res.status(404).json({ message: 'No user exists with that ID' })
           : res.json({
                user,
             })
@@ -59,7 +59,7 @@ module.exports = {
       .then((course) =>
         !course
           ? res.status(404).json({
-              message: 'user deleted, but no courses found',
+              message: 'user deleted',
             })
           : res.json({ message: 'user successfully deleted' })
       )
@@ -69,9 +69,9 @@ module.exports = {
       });
   },
 
-  // Add an assignment to a user
+  // Add a friend to a user
   addFriend(req, res) {
-    console.log('You are adding an friend');
+    console.log('You are adding a friend');
     console.log(req.body);
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -82,12 +82,12 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'No user found with that ID :(' })
+              .json({ message: 'No user exists with that ID' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove assignment from a user
+  // Remove friend from a user
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -98,7 +98,7 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'No user found with that ID :(' })
+              .json({ message: 'No user exists with that ID' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
@@ -111,7 +111,7 @@ module.exports = {
     )
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with this id!' })
+          ? res.status(404).json({ message: 'No user exists with this ID' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
