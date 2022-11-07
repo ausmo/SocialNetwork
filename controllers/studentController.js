@@ -109,7 +109,7 @@ module.exports = {
   removeAssignment(req, res) {
     Student.findOneAndUpdate(
       { _id: req.params.studentId },
-      { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
+      { $pull: { assignments: { assignmentId: req.params.assignmentId } } },
       { runValidators: true, new: true }
     )
       .then((student) =>
